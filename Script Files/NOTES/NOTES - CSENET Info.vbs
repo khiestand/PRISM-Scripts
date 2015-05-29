@@ -1,4 +1,4 @@
-'Option explicit
+option explicit
 
 'LOADING PRISM CUSTOM FUNCTIONS--------------------------------------------------------------------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ END IF
 
 'DIMMING VARIABLES-------------------------------------------------------------------------------------------------------------------------------------
 
-DIM prism_case_number, csenet_info_dialog, ButtonPressed, write_new_line_in_CAAD, csenet_sent_recd, reason_code_line, row, col, beta_agency, worker_signature, case_number_valid, csenet_dateline, csenet_line_01, csenet_line_02, csenet_line_03, csenet_line_04, csenet_line_05
+DIM prism_case_number, csenet_total, csenet_info_dialog, ButtonPressed, write_new_line_in_CAAD, csenet_sent_recd, reason_code_line, row, col, beta_agency, worker_signature, case_number_valid, csenet_dateline, csenet_line_01, csenet_line_02, csenet_line_03, csenet_line_04, csenet_line_05
 
 
 
@@ -90,14 +90,21 @@ LOOP UNTIL worker_signature <> ""                                               
 
 
 'Reads the contents of the CSENET for CAAD noting
-EMReadScreen reason_code_line, 80, 13, 3
-EMReadScreen csenet_sent_recd, 29, 14, 50
+EMReadScreen reason_code_line, 45, 13, 14
+EMReadScreen csenet_sent_recd, 1, 14, 61
 EMReadScreen csenet_line_01, 80, 15, 2
 EMReadScreen csenet_line_02, 80, 16, 2
 EMReadScreen csenet_line_03, 80, 17, 2
 EMReadScreen csenet_line_04, 80, 18, 2
 EMReadScreen csenet_line_05, 80, 19, 2
 
+csenet_line_01 = replace(csenet_line_01, "_", "")
+csenet_line_02 = replace(csenet_line_02, "_", "")
+csenet_line_03 = replace(csenet_line_03, "_", "")
+csenet_line_04 = replace(csenet_line_04, "_", "")
+csenet_line_05 = replace(csenet_line_05, "_", "")
+
+csenet_total = csenet_line_01 & " " & csenet_line_02 & " " & csenet_line_03 & " " & csenet_line_04 & " " & csenet_line_05
 
 'Navigates to CAAD and adds the note
 CALL navigate_to_PRISM_screen("CAAD")
@@ -105,27 +112,23 @@ CALL navigate_to_PRISM_screen("CAAD")
 
 'Adds new CAAD note
 PF5
+     
+EMSetCursor 16, 4
+CALL write_variable_in_CAAD("##CSENET INFO##")                                      'Writes CSENET INFO in title
+                                                                      
+CALL write_bullet_and_variable_in_CAAD("CSESNET sent/rcd", csenet_sent_recd)         'Writes CSENET Sent/Recd and Date/Time
+CALL write_bullet_and_variable_in_CAAD("Reason Code", reason_code_line)             'Writes in the reason code
+CALL write_bullet_and_variable_in_CAAD("CSENET Comments", csenet_total)             'Writes CSENET Comments
+CALL write_variable_in_CAAD("---")				                              'Writes Worker Signature
+CALL write_variable_in_CAAD(worker_signature)
 
-EMWriteScreen "A", 3, 29                                                            'Writes A to add the new caad note
 
-'Writes the CAAD note
-EMWriteScreen "T0111", 4, 54      
+EMWriteScreen "A", 3, 29                                                          'Writes A to add the new caad note
 
-EMwriteScreen "##CSENET INFO##", 16, 4                                              'Writes CSENET INFO in title
-                                                                  
-EMWriteScreen csenet_sent_recd, 16, 21                                              'Writes CSENET Sent/Recd and Date/Time
-EMSetCursor 16, 55
-CALL write_bullet_and_variable_in_CAAD("Worker", worker_signature)
+'Writes the CAAD note type
+EMWriteScreen "T0111", 4, 54
 
-EMSetCursor 17, 4
-EMWriteScreen reason_code_line, 17, 4                                            'Writes in the reason code
-
-IF csenet_line_01 <> "" THEN EMWriteScreen csenet_line_01, 18, 4                 'Writes in the copied text from line 1
-IF csenet_line_02 <> "" THEN EMWriteScreen csenet_line_02, 19, 4                 'Writes in the copied text from line 2
-IF csenet_line_03 <> "" THEN EMWriteScreen csenet_line_03, 20, 4                 'Writes in the copied text from line 3
-IF csenet_line_04 <> "" THEN PF8                                                 'Presses PF8 to scroll down
-EMWriteScreen csenet_line_04, 16, 4                                              'Writes in the copied text from line 4
-IF csenet_line_05 <> "" THEN EMWriteScreen csenet_line_05, 17, 4                 'Writes in the copied text from line 5
+EMWriteScreen PRISM_case_number, 4, 8
 
 'Saves the CAAD note
 transmit
@@ -134,4 +137,54 @@ transmit
 PF3
 
 script_end_procedure("")             'Stops the script
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
