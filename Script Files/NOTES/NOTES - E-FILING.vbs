@@ -42,25 +42,23 @@ END IF
 'THE SCRIPT-----------------------------------------------------------------------------------------------------------------------
 'THE DIALOG---------------------------------------------------
 
-BeginDialog efiling_dialog, 0, 0, 196, 205, "E-Filing"
+BeginDialog efiling_dialog, 0, 0, 186, 180, "E-Filing"
   EditBox 80, 5, 100, 15, prism_case_number
   EditBox 85, 30, 95, 15, action_type
   EditBox 80, 50, 100, 15, doc_efiled
   DropListBox 70, 75, 95, 15, "Select One..."+chr(9)+"Submitted"+chr(9)+"Accepted", efile_status_dropdown
   CheckBox 10, 100, 140, 10, "Check here to add a follow-up worklist", worklist_checkbox
-  EditBox 75, 120, 105, 15, envelope_number
-  EditBox 75, 140, 105, 15, eservice
-  EditBox 75, 160, 105, 15, worker_signature
+  EditBox 75, 115, 105, 15, envelope_number
+  EditBox 75, 135, 105, 15, worker_signature
   ButtonGroup ButtonPressed
-    OkButton 75, 185, 50, 15
-    CancelButton 130, 185, 50, 15
+    OkButton 75, 160, 50, 15
+    CancelButton 130, 160, 50, 15
+  Text 10, 140, 60, 10, "Worker Signature:"
   Text 10, 80, 50, 10, "E-Filing Status:"
   Text 10, 35, 70, 10, "Type of Legal Action:"
   Text 10, 55, 65, 10, "Documents E-Filed:"
-  Text 10, 125, 65, 10, "Envelope Number:"
+  Text 10, 120, 65, 10, "Envelope Number:"
   Text 5, 10, 70, 10, "PRISM Case Number:"
-  Text 10, 145, 60, 10, "E-Service Details:"
-  Text 10, 165, 60, 10, "Worker Signature:"
 EndDialog
 
 
@@ -106,7 +104,6 @@ IF efile_status_dropdown = "Accepted" THEN CALL write_variable_in_CAAD("E-Filing
 CALL write_bullet_and_variable_in_CAAD("Type of Action", action_type)
 CALL write_bullet_and_variable_in_CAAD("Documents E-Filed", doc_efiled)
 CALL write_bullet_and_variable_in_CAAD("Envelope Number", envelope_number)
-CALL write_bullet_and_variable_in_CAAD("E-Service Details", eservice)
 CALL write_variable_in_CAAD(worker_signature)
 transmit
 
@@ -124,6 +121,8 @@ EMWritescreen "FREE", 4, 37
 'SETS THE CURSOR AND STARTS THE WORKLIST
 IF efile_status_dropdown = "Submitted" THEN EMWritescreen "E-Filing Status: Documents Submitted", 10, 4
 IF efile_status_dropdown = "Accepted" THEN EMWritescreen "E-Filing Status: Documents Accepted", 10, 4
+EMSetCursor 11,4
+IF envelope_number <> "" THEN CALL write_bullet_and_variable_in_CAAD("Envelope Number", envelope_number)
 
 END IF
 
@@ -133,5 +132,3 @@ script_end_procedure("Please finish and save your worklist")
 ELSE
 script_end_procedure("")
 END IF
-
-                                                                                
