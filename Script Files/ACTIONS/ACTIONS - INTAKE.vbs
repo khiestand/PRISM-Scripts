@@ -93,6 +93,49 @@ BeginDialog intake_enforcement_dialog, 0, 0, 401, 355, "Enforcement Intake Dialo
   Text 25, 140, 80, 15, "Worklist Description 1"
 EndDialog
 
+BeginDialog motion_to_set_intake_dialog, 0, 0, 381, 305, "Motion to Set Intake Dialog"
+  Text 5, 0, 325, 10, "Motion to Set Case Initiation"
+  GroupBox 10, 15, 170, 90, "Sending to CP"
+  CheckBox 15, 25, 145, 10, "Case Opening - Welcome Letter (*.docx)", CP_coverletter_checkbox
+  CheckBox 15, 40, 115, 10, "Finacial Statement (F0021)", CP_Finacial_Statement_checkbox
+  CheckBox 15, 55, 130, 10, "Child Care Verification (*.docx)", child_care_verif_checkbox
+  CheckBox 15, 70, 140, 10, "Medical Opinion Form (*.docx)", CP_Medical_opinion_checkbox
+  CheckBox 15, 85, 120, 10, "Employment Verification (F0405)", CP_Employment_Verification_checkbox
+  GroupBox 185, 15, 190, 140, "Sending to NCP"
+  CheckBox 190, 25, 120, 10, "Finacial Statement (F0021)", NCP_finacial_statement_checkbox
+  CheckBox 190, 55, 115, 10, "Employment Verification (F0405)", NCP_employment_verification_checkbox
+  CheckBox 190, 40, 130, 10, "Medical Opinion Form (*.docx)", NCP_medical_opinion_checkbox
+  Text 190, 75, 30, 10, "NPA"
+  CheckBox 190, 85, 140, 10, "Authorization to Collect Support (F0100)", F0100_checkbox
+  Text 190, 100, 95, 10, "MFIP, DWP, CCA"
+  CheckBox 190, 115, 180, 10, "Notification of Parental Liability for Support (F0109)", F0109_checkbox
+  Text 190, 130, 35, 10, "MA only"
+  CheckBox 190, 140, 165, 10, "Notification for Medical Support Liability (F0107)", F0107_checkbox
+  GroupBox 10, 110, 170, 190, "CAWD notes to add"
+  Text 15, 125, 80, 10, "Worklist Description"
+  EditBox 15, 140, 140, 15, Worklist_text_editbox_1
+  Text 15, 160, 80, 10, "Calendar days until due"
+  EditBox 100, 155, 30, 15, CAWT_number_days_editbox_1
+  Text 15, 185, 75, 10, "Worklist Description"
+  EditBox 15, 200, 140, 15, Worklist_text_editbox_2
+  Text 15, 220, 80, 10, "Calendar days until due"
+  EditBox 100, 215, 30, 15, CAWT_number_days_editbox_2
+  Text 15, 245, 85, 10, "Worklist Description"
+  EditBox 15, 260, 135, 15, Worklist_text_editbox_3
+  Text 15, 280, 80, 10, "Calendar day until due"
+  EditBox 100, 275, 30, 15, CAWT_number_days_editbox_3
+  GroupBox 190, 160, 185, 35, "File Location on CAST"
+  EditBox 195, 170, 40, 15, Location_CAST_textbox
+  Text 190, 200, 165, 20, "Additional text to CAAD (Docs will automatically list in CAAD note)"
+  EditBox 190, 225, 95, 15, CAAD_note_editbox
+  Text 190, 255, 70, 10, "Sign your CAAD note:"
+  EditBox 265, 250, 90, 15, worker_signature
+  ButtonGroup ButtonPressed
+    OkButton 255, 285, 50, 15
+    CancelButton 310, 285, 50, 15
+EndDialog
+
+
 'SHOW THE INITIAL DIALOG=================================
 DO
 	err_msg = ""
