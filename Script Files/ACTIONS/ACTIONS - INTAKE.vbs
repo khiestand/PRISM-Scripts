@@ -47,6 +47,60 @@ BeginDialog initial_dialog, 0, 0, 206, 85, "Initial Dialog"
     CancelButton 150, 65, 50, 15
 EndDialog
 
+BeginDialog Establisment_case_initiation_dialog, 0, 0, 381, 385, "Establishment Case Initiation"
+  CheckBox 15, 40, 110, 15, "Child Care Expenses (*.docx)", daycare_checkbox
+  CheckBox 15, 55, 80, 15, "Cover Letter (*.docx)", Cover_letter_cp_checkbox
+  CheckBox 15, 70, 120, 15, "Employment Verification (F0405)", emp_verif_cp_checkbox
+  CheckBox 15, 85, 100, 15, "Financial Statement (F0021)", financial_stmt_cp_checkbox
+  CheckBox 15, 100, 110, 15, "Medical Opinion Form (*.docx)", med_opinion_cp_checkbox
+  CheckBox 15, 115, 120, 15, "Parenting Time Calendar (*.docx)", calendar_cp_checkbox
+  CheckBox 15, 130, 100, 15, "Past Support Form (*.docx)", Past_support_cp_checkbox
+  CheckBox 15, 145, 105, 15, "Statement of Rights (F0022)", stmt_right_cp_checkbox
+  CheckBox 15, 160, 125, 15, "Waiver of Personal Service (F5000)", Waiver_cp_checkbox
+  CheckBox 15, 175, 105, 15, "Your Privacy Rights (F0018)", priv_rights_cp_checkbox
+  CheckBox 205, 40, 145, 15, "Authorization to Collect Support (F0100)", auth_collect_ncp_checkbox
+  CheckBox 205, 55, 80, 15, "Cover Letter (*.docx)", cover_letter_ncp_checkbox
+  CheckBox 205, 70, 120, 15, "Employment Verification (F0405)", emp_verif_ncp_checkbox
+  CheckBox 205, 85, 105, 15, "Financial Statement (F0021)", financial_stmt_ncp_checkbox
+  CheckBox 205, 100, 110, 15, "Medical Opinion Form (*.docx)", med_opinion_ncp_checkbox
+  CheckBox 205, 115, 120, 15, "Parenting Time Calendar (*.docx)", calendar_ncp_checkbox
+  CheckBox 205, 130, 100, 15, "Past Support Form (*.docx)", past_support_ncp_checkbox
+  CheckBox 205, 145, 150, 15, "Notice of Medical Support Liability (F0107)", par_med_liab_ncp_checkbox
+  CheckBox 205, 160, 160, 15, "Notice of Parental Liability for Support (F0109)", par_lia_ncp_checkbox
+  CheckBox 205, 175, 105, 15, "Statement of Rights (F0022)", stmt_right_ncp_checkbox
+  CheckBox 205, 190, 130, 15, "Waiver of Personal Service (F5000)", waiver_ncp_checkbox
+  CheckBox 205, 205, 105, 15, "Your Privacy Rights (F0018)", priv_rights_ncp_checkbox
+  EditBox 70, 220, 110, 15, worklist_text_first
+  EditBox 100, 235, 20, 15, cal_days_first
+  EditBox 70, 260, 110, 15, worklist_text_second
+  EditBox 100, 275, 20, 15, cal_days_second
+  EditBox 70, 300, 110, 15, worklist_text_third
+  EditBox 100, 315, 20, 15, cal_days_third
+  EditBox 210, 245, 80, 15, file_location
+  EditBox 195, 295, 140, 15, add_text
+  EditBox 265, 325, 85, 15, worker_signature
+  ButtonGroup ButtonPressed
+    OkButton 230, 345, 50, 15
+    CancelButton 295, 345, 50, 15
+  Text 15, 320, 80, 10, "Calendar days until due:"
+  GroupBox 5, 30, 175, 175, "Documents Sending to CP:"
+  Text 15, 305, 50, 10, "Worklist Text:"
+  Text 10, 10, 105, 10, "Establishment - Case Initiation"
+  Text 15, 280, 80, 10, "Calendar days until due:"
+  GroupBox 195, 30, 170, 205, "Documents Sending to NCP:"
+  Text 15, 265, 50, 10, "Worklist Text:"
+  GroupBox 200, 235, 105, 35, "File Location on CAST"
+  Text 190, 330, 70, 10, "Sign your CAAD Note:"
+  GroupBox 10, 210, 175, 135, "CAWD Notes to Add"
+  Text 200, 275, 130, 20, "Additional text to CAAD note (Docs sent will automatically list in CAAD Note):"
+  Text 15, 225, 50, 10, "Worklist Text:"
+  Text 15, 240, 80, 10, "Calendar days until due:"
+EndDialog
+
+
+
+
+
 BeginDialog intake_enforcement_dialog, 0, 0, 401, 355, "Enforcement Intake Dialog"
   CheckBox 20, 35, 145, 10, "Case Opening - Welcome Letter (*.docx)", CP_welcome_ltr_checkbox
   CheckBox 20, 50, 130, 10, "Child Care Verification (*.docx)", child_care_verif_checkbox
